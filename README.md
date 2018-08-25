@@ -1,16 +1,19 @@
 ## Running the APP
 
-The example assumes that there is a running Whisper v5 node exposing an RPC interface at URL `http://localhost:8545`. For this, you can use `geth` with the folloing parameters:
+The App assumes that there is a running geth client node with an RPC at URL `http://localhost:8545`. 
+### To install geth refer to the go-ethereum documentation 
+[Ethereum Geth installation guide.](https://github.com/ethereum/go-ethereum/wiki/Installing-Geth)
 
-    $ geth <usual p2p flags> --shh --rpc --rpccorsdomain '*'
+
+First, clone this repository and download the dependencies:
+
+    git clone https://github.com/MostafaMhmod/whisper-Chatting-App
 
 
-Then, clone this repository and download the dependencies:
-
-    $ npm install
+    npm install
 
 Finally, start the example with:
 
-    $ npm run dev
+    npm start
 
 The example should be started and the application will be available at `http://localhost:8080`.
