@@ -1,16 +1,28 @@
 ## Running the APP
 
-The example assumes that there is a running Whisper v5 node exposing an RPC interface at URL `http://localhost:8545`. For this, you can use `geth` with the folloing parameters:
+The App assumes that there is a running geth client node with an RPC at URL `http://localhost:8545`. 
+#### To install geth refer to the go-ethereum documentation 
+[Ethereum Geth installation guide.](https://github.com/ethereum/go-ethereum/wiki/Installing-Geth)
 
-    $ geth <usual p2p flags> --shh --rpc --rpccorsdomain '*'
+First, Start geth on the testnet with enabling the Whisper protocol and the RPC connection by using this command.
 
+(This should take around an hour to Synchronize the whole rinkeby testnet).
+
+    geth --syncmode "light" --shh --rpc --rinkeby --rpccorsdomain "http://localhost:8080"
+
+Then make sure to create an Address from the geth client and to send some ether to it by using any supported online wallet like metamask,MEW, etc. 
+
+You can get some Ether using the Rinkeby testnet [From here.](https://faucet.rinkeby.io/)
 
 Then, clone this repository and download the dependencies:
 
-    $ npm install
+    git clone https://github.com/MostafaMhmod/whisper-Chatting-App
+
+
+    npm install
 
 Finally, start the example with:
 
-    $ npm run dev
+    npm start
 
 The example should be started and the application will be available at `http://localhost:8080`.
