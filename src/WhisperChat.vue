@@ -2,23 +2,13 @@
 	<div>
 		<h1>Whisper Chat App</h1>
 		<div v-if="!configured">
-			<input type="checkbox" v-model="asym" /> Asymmetric<br>
-			<asymmetric-key-config v-if="asym" :pub-key="asymPubKey" :key-id="asymKeyId"></asymmetric-key-config>
-			<symmetric-key-config v-else @update-sym-key="updateSymKey" :sym-key-id="symKeyId"></symmetric-key-config>
+			<symmetric-key-config @update-key="updateSymKey" :sym-key-id="symKeyId"></symmetric-key-config>
 			username: <input v-model="name" /><br>
 			<button @click="configWithKey" v-if="(asymKeyId || symKeyId) && name">Start</button>
 		</div>
 		<div v-else>
-			<div v-if="asym">
-				<h3>
-				My publick key: {{asymPubKey}}
-				</h3>
 
-				<h3>
-				Recipient's public key: {{recipientPubKey}} 
-				</h3>
-			</div>
-			<div v-else>
+			<div >
 				Key: {{symKeyId}}
 			</div>
 			<p v-for="m of msgs">

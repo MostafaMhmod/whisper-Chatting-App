@@ -17,7 +17,7 @@ export default {
 
 	methods: {
 		updateKey() {
-			this.$emit('update-sym-key', this.sympw);
+			this.$emit('update-key', this.sympw);
 		}
 	}
 }

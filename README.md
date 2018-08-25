@@ -1,8 +1,4 @@
-# whisper-chat-example
-
-This demonstrates how to use the Ethereum Whisper (v5) API.
-
-## Running the example
+## Running the APP
 
 The example assumes that there is a running Whisper v5 node exposing an RPC interface at URL `http://localhost:8545`. For this, you can use `geth` with the folloing parameters:
 
