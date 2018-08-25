@@ -5,7 +5,7 @@
 			<symmetric-key-config @update-key="updateSymKey" :sym-key-id="symKeyId"></symmetric-key-config>
 
 			username: <input v-model="name" /><br>
-			<button @click="configWithKey" v-if="(asymKeyId || symKeyId) && name">Start</button>
+			<button @click="configWithKey" v-if="(symKeyId) && name">Start</button>
 		</div>
 		<div v-else>
 
@@ -45,7 +45,6 @@ export default {
       text: "",
       symKeyId: null,
       name: "",
-      asymKeyId: null,
       sympw: "",
       asym: true,
       configured: false,
@@ -84,6 +83,11 @@ export default {
     },
 
     updateSymKey(sympw) {
+      this.shh
+        .generateSymKeyFromPassword(sympw)
+        .then(symKeyID => (this.symKeyId = symKeyID));
+    },
+      updateSymKey(sympw) {
       this.shh
         .generateSymKeyFromPassword(sympw)
         .then(symKeyID => (this.symKeyId = symKeyID));
