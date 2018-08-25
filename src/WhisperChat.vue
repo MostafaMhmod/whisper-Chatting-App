@@ -56,7 +56,7 @@ export default {
     return data;
   },
 
-  components: {SymmetricKeyConfig},
+  components: { SymmetricKeyConfig },
 
   methods: {
     sendMessage() {
@@ -74,8 +74,8 @@ export default {
         payload: encodeToHex(JSON.stringify(msg))
       };
 
-     postData.symKeyID = this.symKeyId;
-     postData.topic = this.topic;
+      postData.symKeyID = this.symKeyId;
+      postData.topic = this.topic;
 
       this.shh.post(postData);
 
@@ -87,7 +87,7 @@ export default {
         .generateSymKeyFromPassword(sympw)
         .then(symKeyID => (this.symKeyId = symKeyID));
     },
-      updateTopic(topic) {
+    updateTopic(topic) {
       this.shh
         .generateSymKeyFromPassword(topic)
         .then(topic => (this.topic = topic));
@@ -104,13 +104,12 @@ export default {
         topics: ["0xdeadbeef"]
       };
 
-        if (!this.symKeyId || this.symKeyId.length == 0) {
-          alert("please enter a pasword to generate a key!");
-          return;
-        }
+      if (!this.symKeyId || this.symKeyId.length == 0) {
+        alert("please enter a pasword to generate a key!");
+        return;
+      }
 
-        filter.symKeyID = this.symKeyId;
-      
+      filter.symKeyID = this.symKeyId;
 
       this.msgFilter = this.shh.newMessageFilter(filter).then(filterId => {
         setInterval(() => {
