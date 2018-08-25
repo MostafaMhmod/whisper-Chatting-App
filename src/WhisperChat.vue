@@ -3,6 +3,7 @@
 		<h1>Whisper Chat App</h1>
 		<div v-if="!configured">
 			<symmetric-key-config @update-key="updateSymKey" :sym-key-id="symKeyId"></symmetric-key-config>
+
 			username: <input v-model="name" /><br>
 			<button @click="configWithKey" v-if="(asymKeyId || symKeyId) && name">Start</button>
 		</div>
@@ -26,7 +27,6 @@
 <script>
 import Web3 from "web3";
 import SymmetricKeyConfig from "./SymmetricKeyConfig.vue";
-import AsymmetricKeyConfig from "./AsymmetricKeyConfig.vue";
 import { decodeFromHex, encodeToHex } from "./hexutils";
 
 const defaultRecipientPubKey =
@@ -54,21 +54,10 @@ export default {
       asymPubKey: ""
     };
 
-    this.shh
-      .newKeyPair()
-      .then(id => {
-        data.asymKeyId = id;
-        return this.shh
-          .getPublicKey(id)
-          .then(pubKey => (this.asymPubKey = pubKey))
-          .catch(console.log);
-      })
-      .catch(console.log);
-
     return data;
   },
 
-  components: { AsymmetricKeyConfig, SymmetricKeyConfig },
+  components: {  SymmetricKeyConfig },
 
   methods: {
     sendMessage() {
@@ -87,10 +76,7 @@ export default {
         payload: encodeToHex(JSON.stringify(msg))
       };
 
-      if (this.asym) {
-        postData.pubKey = this.recipientPubKey;
-        postData.sig = this.asymKeyId;
-      } else postData.symKeyID = this.symKeyId;
+     postData.symKeyID = this.symKeyId;
 
       this.shh.post(postData);
 
@@ -114,21 +100,13 @@ export default {
         topics: ["0xdeadbeef"]
       };
 
-      if (this.asym) {
-        if (!this.asymKeyId) {
-          alert("No valid asymmetric key");
-          return;
-        }
-
-        filter.privateKeyID = this.asymKeyId;
-      } else {
         if (!this.symKeyId || this.symKeyId.length == 0) {
           alert("please enter a pasword to generate a key!");
           return;
         }
 
         filter.symKeyID = this.symKeyId;
-      }
+      
 
       this.msgFilter = this.shh.newMessageFilter(filter).then(filterId => {
         setInterval(() => {

@@ -1,8 +1,18 @@
 <template>
 	<div>
-		Key generation password: <input v-model="sympw" @input="updateKey" /><br>
-		Symmetric key ID: {{symKeyId || "Type a password to start generating the key"}}
+		<h4>
+		Enter password: <input v-model="sympw" type="password" @input="updateKey" /><br>
+		</h4>
+
+		<h4>
+		Symmetric key ID: {{symKeyId || ""}}
+		</h4>
+
+		<h4>
+			Enter Topic: <input v-model="topic" @input="updateKey" /><br>
+		</h4>
 	</div>
+	
 </template>
 
 <script>
@@ -11,14 +21,18 @@ export default {
 
 	data() {
 		return {
-			sympw: ""
+			sympw: "",
+			topic:""
 		}
 	},
 
 	methods: {
 		updateKey() {
 			this.$emit('update-key', this.sympw);
-		}
+		},
+		updateTopic() {
+			this.$emit('update-topic', this.topic);
+		},
 	}
 }
 </script>
