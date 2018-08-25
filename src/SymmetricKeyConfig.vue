@@ -8,8 +8,9 @@
 		Symmetric key ID: {{symKeyId || ""}}
 		</h4>
 
+
 		<h4>
-			Enter Topic: <input v-model="topic" @input="updateKey" /><br>
+			Enter Topic: <input v-model="topic" @input="updateTopic" /><br>
 		</h4>
 	</div>
 	
@@ -17,22 +18,22 @@
 
 <script>
 export default {
-	props: ['symKeyId'],
+  props: ["symKeyId"],
 
-	data() {
-		return {
-			sympw: "",
-			topic:""
-		}
-	},
+  data() {
+    return {
+      sympw: "",
+      topic: ""
+    };
+  },
 
-	methods: {
-		updateKey() {
-			this.$emit('update-key', this.sympw);
-		},
-		updateTopic() {
-			this.$emit('update-topic', this.topic);
-		},
-	}
-}
+  methods: {
+    updateKey() {
+      this.$emit("update-key", this.sympw);
+    },
+    updateTopic() {
+      this.$emit("update-topic", this.topic);
+    }
+  }
+};
 </script>

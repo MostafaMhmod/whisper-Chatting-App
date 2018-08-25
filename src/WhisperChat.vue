@@ -6,7 +6,7 @@
 
 			username: <input v-model="name" /><br>
 			<button @click="configWithKey" v-if="(symKeyId) && name">Start</button>
-		</div>
+		</div> 
 		<div v-else>
 
 			<div >
@@ -87,10 +87,10 @@ export default {
         .generateSymKeyFromPassword(sympw)
         .then(symKeyID => (this.symKeyId = symKeyID));
     },
-      updateSymKey(sympw) {
+      updateTopic(topic) {
       this.shh
-        .generateSymKeyFromPassword(sympw)
-        .then(symKeyID => (this.symKeyId = symKeyID));
+        .generateSymKeyFromPassword(topic)
+        .then(topic => (this.topic = topic));
     },
 
     configWithKey() {
