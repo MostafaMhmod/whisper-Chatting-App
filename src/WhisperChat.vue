@@ -31,7 +31,6 @@ import { decodeFromHex, encodeToHex } from "./hexutils";
 
 const defaultRecipientPubKey =
   "0x04ffb2647c10767095de83d45c7c0f780e483fb2221a1431cb97a5c61becd3c22938abfe83dd6706fc1154485b80bc8fcd94aea61bf19dd3206f37d55191b9a9c4";
-const defaultTopic = "0x5a4ea131";
 
 export default {
   data() {
@@ -49,8 +48,7 @@ export default {
       asym: true,
       configured: false,
       topic: null,
-      recipientPubKey: defaultRecipientPubKey,
-      asymPubKey: ""
+      recipientPubKey: defaultRecipientPubKey
     };
 
     return data;
@@ -101,7 +99,7 @@ export default {
       }
 
       let filter = {
-        topics: ["0xdeadbeef"]
+        topics: [].push(this.topic)
       };
 
       if (!this.symKeyId || this.symKeyId.length == 0) {
