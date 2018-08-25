@@ -2,7 +2,7 @@
 	<div>
 		<h1>Whisper Chat App</h1>
 		<div v-if="!configured">
-			<symmetric-key-config @update-key="updateSymKey" :sym-key-id="symKeyId"></symmetric-key-config>
+			<symmetric-key-config @update-topic="updateTopic" @update-key="updateSymKey" :sym-key-id="symKeyId"></symmetric-key-config>
 
 			username: <input v-model="name" /><br>
 			<button @click="configWithKey" v-if="(symKeyId) && name">Start</button>
