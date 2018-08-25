@@ -4,9 +4,6 @@ The example assumes that there is a running Whisper v5 node exposing an RPC inte
 
     $ geth <usual p2p flags> --shh --rpc --rpccorsdomain '*'
 
-`--shh` is the option that enables Whisper v5 for the node.
-
-`--rpc` enables the HTTP RPC interface and `--rplccorsdomain '*'` will disable this annoying CORS verification in the browser. Needless to say, this is only acceptable because this is an example.
 
 Then, clone this repository and download the dependencies:
 
