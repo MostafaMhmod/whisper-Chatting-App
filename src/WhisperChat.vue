@@ -49,7 +49,7 @@ export default {
       sympw: "",
       asym: true,
       configured: false,
-      topic: defaultTopic,
+      topic: null,
       recipientPubKey: defaultRecipientPubKey,
       asymPubKey: ""
     };
@@ -57,7 +57,7 @@ export default {
     return data;
   },
 
-  components: {  SymmetricKeyConfig },
+  components: {SymmetricKeyConfig},
 
   methods: {
     sendMessage() {
@@ -70,13 +70,13 @@ export default {
 
       let postData = {
         ttl: 7,
-        topic: "0x07678231",
         powTarget: 2.01,
         powTime: 100,
         payload: encodeToHex(JSON.stringify(msg))
       };
 
      postData.symKeyID = this.symKeyId;
+     postData.topic = this.topic;
 
       this.shh.post(postData);
 
