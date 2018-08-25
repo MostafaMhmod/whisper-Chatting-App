@@ -10,8 +10,9 @@ First, Start geth on the testnet with enabling the Whisper protocol and the RPC 
 
     geth --syncmode "light" --shh --rpc --rinkeby --rpccorsdomain "http://localhost:8080"
 
-Then make sure to create an account an to send some ether to it by using any supported online wallet like metamask,MEW, etc. 
-you can get some Ether using the Rinkeby testnet [From here](https://faucet.rinkeby.io/)
+Then make sure to create an Address from the geth client and to send some ether to it by using any supported online wallet like metamask,MEW, etc. 
+
+You can get some Ether using the Rinkeby testnet [From here.](https://faucet.rinkeby.io/)
 
 Then, clone this repository and download the dependencies:
 
