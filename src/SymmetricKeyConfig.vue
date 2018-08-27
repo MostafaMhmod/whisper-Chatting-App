@@ -5,7 +5,7 @@
 		</h4>
 
 		<h4>
-		Symmetric key ID: {{symKeyId || ""}}
+		Symmetric key ID: {{symKeyId}}
 		</h4>
 
 

@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<h1>Whisper Example Chat Application</h1>
+		<h1>Whisper Application</h1>
 		<div v-if="!configured">
-			<symmetric-key-config  @update-key="updateSymKey" :sym-key-id="symKeyId"></symmetric-key-config>
+			<symmetric-key-config  @update-key="updateSymKey" @update-topic="updateTopic" :sym-key-id="symKeyId"></symmetric-key-config>
 
 			username: <input v-model="name" /><br>
 			<button @click="configWithKey" v-if="name">Start</button>
@@ -14,7 +14,7 @@
 			<p v-for="m of msgs">
 				<b>{{m.name}}</b>: {{m.text}}
 			</p>
-			Please type a message: <input v-model="text" @keyup.enter="sendMessage" />
+			<input placeholder="Please type a message: " v-model="text" @keyup.enter="sendMessage" />
 			<button @click="sendMessage">Send</button>
 		</div>
 	</div>
@@ -41,7 +41,7 @@ export default {
       sympw: "",
       asym: true,
       configured: false,
-      topic: "0x5a4ea131",
+      topic: '0x07678231',
       asymPubKey: ""
     };
 
@@ -52,9 +52,8 @@ export default {
         return this.shh
           .getPublicKey(id)
           .then(pubKey => (this.asymPubKey = pubKey))
-          .catch(console.log);
+          
       })
-      .catch(console.log);
 
     return data;
   },
@@ -72,7 +71,7 @@ export default {
 
       let postData = {
         ttl: 7,
-        topic: "0x07678231",
+        topic: '0x07678231',
         powTarget: 2.01,
         powTime: 100,
         payload: encodeToHex(JSON.stringify(msg))
@@ -91,7 +90,8 @@ export default {
         .then(symKeyID => (this.symKeyId = symKeyID));
     },
     updateTopic(topic) {
-      this.topic = "0x07678231";
+      this.topic = this.web3.utils.sha3(topic).substring(0,10);
+      console.log(this.topic)
     },
 
     configWithKey() {
@@ -107,7 +107,7 @@ export default {
       }
 
       let filter = {
-        topics: ["0x07678231"]
+        topics: [this.topic]
       };
 
       if (!this.symKeyId || this.symKeyId.length == 0) {
